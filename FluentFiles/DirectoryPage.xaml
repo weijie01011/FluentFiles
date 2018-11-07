@@ -1,0 +1,41 @@
+﻿<Page
+    x:Class="FluentFiles.DirectoryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FluentFiles"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="32,32,0,20">
+            <FontIcon Glyph="{Binding RootKnownDirectory.Icon}" Margin="0,0,12,0" FontSize="28" />
+            <TextBlock Text="{Binding Path}" FontSize="28" />
+        </StackPanel>
+        <Line X1="0" Y1="0" X2="1" Y2="0" 
+              Stroke="#F0F0F0" StrokeThickness="2" 
+              Stretch="Fill" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="600" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="160" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Name" />
+            <TextBlock Grid.Column="1" Text="Size" />
+            <TextBlock Grid.Column="2" Text="Date Modified" />
+        </Grid>
+        <ListView ItemsSource="{Binding Items}"
+                  CanDragItems="False"
+                  IsItemClickEnabled="False"
+                  IsSwipeEnabled="False"
+                  Margin="0,10,0,0"
+                  SelectionMode="Single">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <local:FilesListItemView DataContext="{Binding}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackPanel>
+</Page>
