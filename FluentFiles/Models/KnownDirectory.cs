@@ -9,8 +9,8 @@ namespace FluentFiles.Models
 {
     public class KnownDirectory
     {
-        public static readonly KnownDirectory Desktop = new KnownDirectory("Desktop", "\uE7F9", @"C:\Users\remi_\Desktop");
-        public static readonly KnownDirectory Downloads = new KnownDirectory("Downloads", "\uE896", @"C:\Users\remi_\Downloads");
+        public static readonly KnownDirectory Desktop = new KnownDirectory("Desktop", "\uE7F9", @"%USERPROFILE%\Desktop");
+        public static readonly KnownDirectory Downloads = new KnownDirectory("Downloads", "\uE896", @"%USERPROFILE%\Downloads");
         public static readonly KnownDirectory Documents = new KnownDirectory("Documents", "\uF000", KnownFolders.DocumentsLibrary);
         public static readonly KnownDirectory Music = new KnownDirectory("Music", "\uE8D6", KnownFolders.MusicLibrary);
         public static readonly KnownDirectory Pictures = new KnownDirectory("Pictures", "\uEB9F", KnownFolders.PicturesLibrary);
@@ -33,6 +33,7 @@ namespace FluentFiles.Models
         {
             DisplayName = displayName;
             Icon = icon;
+            path = Environment.ExpandEnvironmentVariables(path);
             Folder = StorageFolder.GetFolderFromPathAsync(path).AsTask().Result;
         }
 
